@@ -6,8 +6,10 @@
 # CAM_CODEC=h264 (default): encoded on the camera machine, ~8 Mbit/s, light on Wi-Fi, in NUT (bridge: --in-format nut);
 #   mjpeg: raw copy (~100 Mbit/s, bridge: --in-format mjpeg).
 # TS_OVERLAY=1: burns the capture time in the top-left corner (latency measurement only).
-# usage: ./send-cam.sh [bridge_host=$BRIDGE_HOST or minisforum] [port=5101]
-HOST="${1:-${BRIDGE_HOST:-minisforum}}"; PORT="${2:-5101}"; NAME="${CAM_NAME:-C920}"; CODEC="${CAM_CODEC:-h264}"
+# usage: ./send-cam.sh [bridge_host=$BRIDGE_HOST] [port=5101]   (the bridge host is required: argument or BRIDGE_HOST)
+HOST="${1:-${BRIDGE_HOST:-}}"
+[ -n "$HOST" ] || { echo "bridge host missing: ./send-cam.sh <bridge_host> [port], or set BRIDGE_HOST" >&2; exit 2; }
+PORT="${2:-5101}"; NAME="${CAM_NAME:-C920}"; CODEC="${CAM_CODEC:-h264}"
 DEV=""
 for d in /sys/class/video4linux/video*; do
   if grep -q "$NAME" "$d/name" 2>/dev/null && [ "$(cat "$d/index")" = 0 ]; then DEV="/dev/$(basename "$d")"; break; fi

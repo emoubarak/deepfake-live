@@ -14,7 +14,7 @@ camera machine: C920 --H.264 (NUT) over TCP--> GPU machine:5101 (bridge.py + Fac
 ## Requirements
 
 - GPU machine: NVIDIA GPU, a FaceFusion checkout with its `.venv` (`FACEFUSION_DIR`, default
-  `~/repos/tools/facefusion`), Python packages `av` (PyAV) in that venv. Optional: TensorRT 10.12 in the venv
+  `~/src/facefusion`), Python packages `av` (PyAV) in that venv. Optional: TensorRT 10.12 in the venv
   (the version FaceFusion recommends) for the speeds below.
 - Camera machine: `ffmpeg`, `v4l2-ctl` (v4l-utils), a webcam (tested with a Logitech C920), OBS or `ffplay`.
 - Both machines on the same private network (tested over Tailscale). The bridge listens on `--in-host` if given,
@@ -42,8 +42,9 @@ camera machine: C920 --H.264 (NUT) over TCP--> GPU machine:5101 (bridge.py + Fac
 - `stop-live.sh`: stops the bridge and the sender (anchored patterns, never a broad `pkill`).
 
 Environment: `FACEFUSION_DIR`, `CAM_HOST` (camera machine: ssh target and default `--out-host`, default `surface`),
-`BRIDGE_HOST` (GPU machine, default `minisforum`), `LIVE_DIR` (log, snapshot and recalibration flag, default
-`~/scratch/deepfake-direct`), `CURL_LIMIT` (optional rate cap for FaceFusion's model downloads, e.g. `3M`).
+`BRIDGE_HOST` (GPU machine, used by `send-cam.sh` when no host is given as an argument; there is no default), `LIVE_DIR`
+(log, snapshot and recalibration flag, default `~/scratch/deepfake-direct`), `CURL_LIMIT` (optional rate cap for
+FaceFusion's model downloads, e.g. `3M`).
 
 Optional GPU arbiter: if `EGPU` points to one, or an `egpu` command is on the PATH, `run-live.sh` runs the bridge as
 `egpu avec gpu --raison deepfake-live --calme 20s -- <bridge>`, so a machine that shares its GPU with a local LLM

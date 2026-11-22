@@ -25,7 +25,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from fractions import Fraction
 
-FF_DIR = os.environ.get('FACEFUSION_DIR') or os.path.expanduser('~/repos/tools/facefusion')
+FF_DIR = os.environ.get('FACEFUSION_DIR') or os.path.expanduser('~/src/facefusion')
 LIVE_DIR = os.environ.get('LIVE_DIR') or os.path.expanduser('~/scratch/deepfake-direct')
 START_DIR = os.getcwd()  # relative paths given on the command line are resolved from here, not from FaceFusion
 sys.path.insert(0, FF_DIR)

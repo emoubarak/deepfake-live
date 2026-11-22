@@ -3,7 +3,7 @@
 # LIVE_DIR: log, snapshot and recalibration flag (default ~/scratch/deepfake-direct); the default photo is
 # $LIVE_DIR/face-source-1.png. PROVIDER: tensorrt (default, needs TensorRT in the venv) or cuda.
 # The bridge runs for at most 2 h (--seconds 7200).
-FF="${FACEFUSION_DIR:-$HOME/repos/tools/facefusion}"; LIVE="${LIVE_DIR:-$HOME/scratch/deepfake-direct}"
+FF="${FACEFUSION_DIR:-$HOME/src/facefusion}"; LIVE="${LIVE_DIR:-$HOME/scratch/deepfake-direct}"
 MODE="${1:-swap}"; SRC="${2:-$LIVE/face-source-1.png}"; D="$(dirname "$(readlink -f "$0")")"; P="${PROVIDER:-tensorrt}"
 case "$MODE" in
   swap) ARGS=(--mode swap --model hyperswap_1c_256 --weight 1.0 --pixel-boost 512x512 --expression 80 --provider "$P") ;;

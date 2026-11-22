@@ -8,7 +8,7 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 
-FF_DIR = os.environ.get('FACEFUSION_DIR') or os.path.expanduser('~/repos/tools/facefusion')
+FF_DIR = os.environ.get('FACEFUSION_DIR') or os.path.expanduser('~/src/facefusion')
 sys.path.insert(0, FF_DIR)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 photo_path, driving_path, out_path = (os.path.abspath(p) for p in sys.argv[1:4])
